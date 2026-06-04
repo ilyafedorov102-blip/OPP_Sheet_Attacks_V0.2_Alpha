@@ -85,7 +85,7 @@ public class FactoryProduction : MonoBehaviour
             // игнорируем всё что относится к системе размещения
             if (h.GetComponent<ResourceNode>() != null) continue;
             if (h.GetComponent<PreviewNode>() != null) continue;
-            if (h.GetComponent<TerritoryCell>() != null) continue;  
+            if (h.GetComponent<TerritoryCell>() != null) continue;
             if (h.GetComponent<FactoryProduction>() != null) continue;
 
             // ВАЖНО: игнорируем триггеры (UI и т.п.)

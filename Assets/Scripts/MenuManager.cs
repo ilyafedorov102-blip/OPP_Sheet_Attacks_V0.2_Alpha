@@ -1,6 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
@@ -11,11 +12,30 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject BuildingsDefence;
     [SerializeField] private GameObject BuildingsOthers;
 
+    [SerializeField] private Button btnRoadAndTerritory;
+    [SerializeField] private Button btnAttack;
+    [SerializeField] private Button btnDefence;
+    [SerializeField] private Button btnOther;
+    [SerializeField] private Button btnMove;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        if (btnRoadAndTerritory == null)
+            btnRoadAndTerritory = GameObject.Find("btnBuildingsRoad")?.GetComponent<Button>();
+
+        if (btnAttack == null)
+            btnAttack = GameObject.Find("btnBuildingsAttack")?.GetComponent<Button>();
+
+        if (btnDefence == null)
+            btnDefence = GameObject.Find("btnBuildingsDefence")?.GetComponent<Button>();
+
+        if (btnOther == null)
+            btnOther = GameObject.Find("btnBuildingsOther")?.GetComponent<Button>();
+
+        if (btnMove == null)
+            btnMove = GameObject.Find("btnStep")?.GetComponent<Button>();
     }
 
     // Update is called once per frame
@@ -46,9 +66,35 @@ public class MenuManager : MonoBehaviour
     public void ChangePause()
     {
         if (Pause.activeSelf == true)
+        {
             Pause.SetActive(false);
+
+            btnRoadAndTerritory.interactable = true;
+            btnAttack.interactable = true;
+            btnDefence.interactable = true;
+            btnOther.interactable = true;
+            btnMove.interactable = true;
+
+            BuildingsRoadAndTerritory.SetActive(true);
+            BuildingsAttacks.SetActive(true);
+            BuildingsDefence.SetActive(true);
+            BuildingsOthers.SetActive(true);
+        }
         else
+        {
             Pause.SetActive(true);
+
+            btnRoadAndTerritory.interactable = false;
+            btnAttack.interactable = false;
+            btnDefence.interactable = false;
+            btnOther.interactable = false;
+            btnMove.interactable = false;
+
+            BuildingsRoadAndTerritory.SetActive(false);
+            BuildingsAttacks.SetActive(false);
+            BuildingsDefence.SetActive(false);
+            BuildingsOthers.SetActive(false);
+        }
     }
 
     public void ChangePanelBuildingsRoadAndTerritory()

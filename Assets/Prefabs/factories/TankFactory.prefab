@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee2fe4c331be5ad41a4e5d1e7605e91c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FactoryProduction
-  placePrefab: {fileID: 4818843581684156869, guid: ed471bbc1c7bb8041b34669434f58a40, type: 3}
+  placePrefab: {fileID: 205202808325555700, guid: 27443f4735fc3d74bb9f3be7621efb5e, type: 3}
   previewPrefab: {fileID: 8754474720767239388, guid: 324602f8f7edd9c4d976e9cc69fa04b6, type: 3}
   controlPanel: {fileID: 8754999060134018436}
   buildButton: {fileID: 8231242709635067372}
@@ -567,6 +567,11 @@ MonoBehaviour:
   BuildingsAttacks: {fileID: 0}
   BuildingsDefence: {fileID: 0}
   BuildingsOthers: {fileID: 0}
+  btnRoadAndTerritory: {fileID: 0}
+  btnAttack: {fileID: 0}
+  btnDefence: {fileID: 0}
+  btnOther: {fileID: 0}
+  btnMove: {fileID: 0}
 --- !u!1 &3968887890751264173
 GameObject:
   m_ObjectHideFlags: 0
@@ -901,7 +906,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &9206989299892714586
 MonoBehaviour:
