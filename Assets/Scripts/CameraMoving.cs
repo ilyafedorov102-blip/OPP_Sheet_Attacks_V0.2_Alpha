@@ -97,18 +97,18 @@ public class CameraMoving : MonoBehaviour
 
     private void HandleDrag()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
             isDragging = true;
             dragOrigin = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(1))
         {
             isDragging = false;
         }
 
-        if (isDragging && Input.GetMouseButton(0))
+        if (isDragging && Input.GetMouseButton(1))
         {
             Vector3 currentMousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             Vector3 difference = dragOrigin - currentMousePos;
