@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3523087979894051554}
   - component: {fileID: 5944900210685109625}
   - component: {fileID: -2417578048363637256}
+  - component: {fileID: 918946614103385405}
   m_Layer: 0
   m_Name: Materials
   m_TagString: materials
@@ -138,3 +139,17 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.83, y: 1.64}
   m_EdgeRadius: 0
+--- !u!114 &918946614103385405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4805988762291500585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d5fb0f899201804a996b0bf42babae4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ResourceNode
+  resourceType: 4
+  occupied: 0

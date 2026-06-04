@@ -36,8 +36,8 @@ public class ResourcesManager : MonoBehaviour
 
     void Update()
     {
-        textResources_Pl1.text = $"\t{pl1.iron}(+{pl1.ironMiner})\t\t{pl1.gold}(+{pl1.goldMiner})\t\t{pl1.titanium}(+{pl1.titaniumMiner})\t\t{pl1.oil}(+{pl1.oilMiner})\n\t{pl1.buildMaterials}(+{pl1.buildMaterialsMiner})\t\t{pl1.electricity}\t\t{pl1.money}";
-        textResources_Pl2.text = $"\t{pl2.iron}(+{pl2.ironMiner})\t\t{pl2.gold}(+{pl2.goldMiner})\t\t{pl2.titanium}(+{pl2.titaniumMiner})\t\t{pl2.oil}(+{pl2.oilMiner})\n\t{pl2.buildMaterials}(+{pl2.buildMaterialsMiner})\t\t{pl2.electricity}\t\t{pl2.money}";
+        textResources_Pl1.text = $"\t{pl1.iron}(+{pl1.ironMiner})   |   {pl1.gold}(+{pl1.goldMiner})   |   {pl1.titanium}(+{pl1.titaniumMiner})   |   {pl1.oil}(+{pl1.oilMiner})\n\t{pl1.buildMaterials}(+{pl1.buildMaterialsMiner}    |      {pl1.electricity}      |   {pl1.money}";
+        textResources_Pl2.text = $"\t{pl2.iron}(+{pl2.ironMiner})   |   {pl2.gold}(+{pl2.goldMiner})   |   {pl2.titanium}(+{pl2.titaniumMiner})   |   {pl2.oil}(+{pl2.oilMiner})\n\t{pl2.buildMaterials}(+{pl2.buildMaterialsMiner})   |      {pl2.electricity}      |   {pl2.money}";
 
         if (timer.minute % 1 == 0 && timer.minute != resFlow)
         {
@@ -72,7 +72,7 @@ public class ResourcesManager : MonoBehaviour
                 Pos.x = Mathf.Round(Pos.x / 2 / cellSize) * cellSize * 2;
                 Pos.y = Mathf.Round(Pos.y / 2 / cellSize) * cellSize * 2;
 
-                // Проверяем, не занята ли позиция
+                // Проверяем, не занята ли позиция и не взаимодействует 
                 if (!usedPositions.Contains(Pos) && !isColMainB)
                 {
                     usedPositions.Add(Pos);

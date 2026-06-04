@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6692513410131330740}
   - component: {fileID: 6013627813916145838}
   - component: {fileID: -7236221286944966338}
+  - component: {fileID: 90360508693809110}
   m_Layer: 0
   m_Name: Iron
   m_TagString: iron
@@ -138,3 +139,17 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.64, y: 1.39}
   m_EdgeRadius: 0
+--- !u!114 &90360508693809110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5318045470951896431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d5fb0f899201804a996b0bf42babae4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ResourceNode
+  resourceType: 0
+  occupied: 0

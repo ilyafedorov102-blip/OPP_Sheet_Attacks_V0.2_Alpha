@@ -15,7 +15,7 @@ public class Timer : MonoBehaviour
     {
         if (Pause.activeSelf == false)
         {
-            miliSecond += 0.2f;
+            miliSecond += 1f;
 
             if (miliSecond >= 1)
             {
