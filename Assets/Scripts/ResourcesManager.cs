@@ -77,6 +77,27 @@ public class ResourcesManager : MonoBehaviour
                 {
                     usedPositions.Add(Pos);
                     temp = Instantiate(Obj, Pos, Quaternion.identity);
+                    // Убедимся, что у объекта есть компонент ResourceNode и коллайдер для обнаружения
+                    var rn = temp.GetComponent<ResourceNode>();
+                    if (rn == null)
+                        rn = temp.AddComponent<ResourceNode>();
+
+                    // Попытаемся определить тип ресурса по ссылке на префаб
+                    if (Obj == Sp_iron) rn.resourceType = ResourceType.Iron;
+                    else if (Obj == Sp_gold) rn.resourceType = ResourceType.Gold;
+                    else if (Obj == Sp_Titanium) rn.resourceType = ResourceType.Titanium;
+                    else if (Obj == Sp_oil) rn.resourceType = ResourceType.Oil;
+                    else if (Obj == Sp_materials) rn.resourceType = ResourceType.Materials;
+
+                    // Добавим коллайдер для обнаружения при размещении
+                    var col = temp.GetComponent<Collider2D>();
+                    if (col == null)
+                    {
+                        var box = temp.AddComponent<BoxCollider2D>();
+                        box.isTrigger = true;
+                        // Размер клетки — cellSize
+                        box.size = new Vector2(cellSize, cellSize);
+                    }
                     amount--;
                     positionFound = true;
                 }

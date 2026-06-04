@@ -32,6 +32,27 @@ public class TerritoryManager : MonoBehaviour
         if (captureButton != null)
             captureButton.onClick.AddListener(OnCaptureButtonClick);
     }
+
+    // Возвращает тип территории для мировой позиции (позиция игрового объекта) — чисто 2D
+    public TerritoryType GetTerritoryTypeAtPosition(Vector2 worldPos)
+    {
+        if (grid == null)
+            return TerritoryType.Neutral;
+
+        // Преобразуем мировую координату в индекс сетки (в 2D)
+        Vector2 gridParentPos = gridParent != null ? (Vector2)gridParent.transform.position : Vector2.zero;
+        Vector2 localPos = worldPos - gridParentPos;
+        int x = Mathf.FloorToInt(localPos.x / cellSize + 0.5f);
+        int y = Mathf.FloorToInt(localPos.y / cellSize + 0.5f);
+
+        if (x < 0 || x >= gridWidth || y < 0 || y >= gridHeight)
+            return TerritoryType.Neutral;
+
+        if (grid[x, y] == null)
+            return TerritoryType.Neutral;
+
+        return grid[x, y].type;
+    }
     void Grid_Create()
     {
         grid = new TerritoryCell[gridWidth, gridHeight];

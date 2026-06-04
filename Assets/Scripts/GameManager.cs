@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] internal GameObject Panel;
 
     [SerializeField] private ResourcesManager RM;
+    [SerializeField] private TerritoryManager territoryManager;
     [SerializeField] private Moves PlMoves;
 
     private int tag_num;
@@ -25,6 +26,28 @@ public class GameManager : MonoBehaviour
     internal bool isSet = false;
     private void Start()
     {
+    }
+
+    private void UpdateResMinerByType(ResourcesData ResPlData, ResourceType type)
+    {
+        switch (type)
+        {
+            case ResourceType.Iron:
+                ResPlData.ironMiner++;
+                break;
+            case ResourceType.Gold:
+                ResPlData.goldMiner++;
+                break;
+            case ResourceType.Materials:
+                ResPlData.buildMaterialsMiner++;
+                break;
+            case ResourceType.Titanium:
+                ResPlData.titaniumMiner++;
+                break;
+            case ResourceType.Oil:
+                ResPlData.oilMiner++;
+                break;
+        }
     }
 
     private void Update()
@@ -42,16 +65,70 @@ public class GameManager : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0) && Obj_in_Borders(currentObject)) // Фиксируем объект на месте при повторном нажатии ЛКМ
             {
-                isDragging = false;
-                if (currentObject != null)
+                // Проверяем, находится ли выбранная клетка в собственной территории
+                Vector2 placePos = currentObject.transform.position;
+                TerritoryType cellType = TerritoryType.Neutral;
+                if (territoryManager != null)
+                    cellType = territoryManager.GetTerritoryTypeAtPosition(placePos);
+
+                TerritoryType currentPlayerType = PlMoves.isMoveFirst ? TerritoryType.Player1 : TerritoryType.Player2;
+
+                if (cellType != currentPlayerType)
                 {
-                    SR = currentObject.GetComponent<SpriteRenderer>();
-                    if (SR != null)
-                        SR.color = DefaultCol;
+                    // Нельзя ставить не на своей территории
+                    if (SR != null) SR.color = RedCol;
                 }
-                UpdateResMiner(PlMoves.isMoveFirst ? RM.pl1 : RM.pl2);
-                currentObject = null;
-                isSet = false;
+                else
+                {
+                    // Ищем ресурс под точкой
+                    Collider2D[] hits = Physics2D.OverlapPointAll(placePos);
+                    ResourceNode found = null;
+                    foreach (var h in hits)
+                    {
+                        var rn = h.GetComponent<ResourceNode>();
+                        if (rn != null && !rn.occupied)
+                        {
+                            found = rn;
+                            break;
+                        }
+                    }
+
+                    if (found == null)
+                    {
+                        // Нет подходящего ресурса
+                        if (SR != null) SR.color = RedCol;
+                    }
+                    else
+                    {
+                        // Успешное размещение — привязываем Miner к ResourceNode
+                        var minerComp = currentObject.GetComponent<Miner>();
+                        if (minerComp == null)
+                            minerComp = currentObject.AddComponent<Miner>();
+
+                        minerComp.Claim(found);
+
+                        var playerData = PlMoves.isMoveFirst ? RM.pl1 : RM.pl2;
+                        if (playerData != null)
+                        {
+                            playerData.ResMiners.Add(currentObject);
+                        }
+
+                        isDragging = false;
+                        if (currentObject != null)
+                        {
+                            SR = currentObject.GetComponent<SpriteRenderer>();
+                            if (SR != null)
+                                SR.color = DefaultCol;
+                        }
+
+                        // Увеличиваем счётчик в зависимости от типа минера
+                        if (playerData != null && minerComp != null)
+                            UpdateResMinerByType(playerData, minerComp.resourceType);
+
+                        currentObject = null;
+                        isSet = false;
+                    }
+                }
             }
             else
             {
