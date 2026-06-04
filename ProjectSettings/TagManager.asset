@@ -9,12 +9,16 @@ TagManager:
   - titanium
   - oil
   - materials
-  - mainBuilding
   - iron_miner
   - gold_miner
   - titanium_miner
   - oil_miner
   - materials_miner
+  - Player1
+  - Player2
+  - Building
+  - MainBuild1
+  - MainBuild2
   layers:
   - Default
   - TransparentFX

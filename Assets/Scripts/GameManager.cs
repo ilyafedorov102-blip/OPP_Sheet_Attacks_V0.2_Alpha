@@ -4,11 +4,6 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private float cellSize;
-    [SerializeField] private float zoomSpeed = 5f;
-    [SerializeField] private float minZoom = 2f;
-    [SerializeField] private float maxZoom = 10f;
-    [SerializeField] private float mapWidth = 20f;   // Ширина игрового поля
-    [SerializeField] private float mapHeight = 12f;  // Высота игрового поля
     [SerializeField] private Color RedCol = Color.red;
     [SerializeField] private Vector2 minBorder;
     [SerializeField] private Vector2 maxBorder;
@@ -22,6 +17,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] internal Button btnSetObj;
     [SerializeField] internal GameObject Panel;
 
+    [SerializeField] private ResourcesManager RM;
+    [SerializeField] private Moves PlMoves;
+
+    private int tag_num;
     private bool isDragging = false;
     internal bool isSet = false;
     private void Start()
@@ -30,23 +29,6 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        float scroll = Input.GetAxis("Mouse ScrollWheel");
-
-        if (scroll != 0)
-        {
-            // Сохраняем позицию мыши в мировых координатах
-            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-            // Меняем зум
-            float newZoom = Camera.main.orthographicSize - scroll * zoomSpeed;
-            Camera.main.orthographicSize = Mathf.Clamp(newZoom, minZoom, maxZoom);
-
-            // Смещаем камеру, чтобы мышь оставалась на той же позиции
-            Vector3 newMouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-            Camera.main.transform.position += mouseWorldPos - newMouseWorldPos;
-            LimitCameraPosition();
-        }
         if (isSet)
         {
             setObject();
@@ -67,6 +49,7 @@ public class GameManager : MonoBehaviour
                     if (SR != null)
                         SR.color = DefaultCol;
                 }
+                UpdateResMiner(PlMoves.isMoveFirst ? RM.pl1 : RM.pl2);
                 currentObject = null;
                 isSet = false;
             }
@@ -80,6 +63,34 @@ public class GameManager : MonoBehaviour
                 // Проверяем границы и меняем цвет
                 UpdateObjectColor();
             }
+        }
+    }
+    private void UpdateResMiner(ResourcesData ResPlData)
+    {
+        tag_num = 0;
+        if (objectPrefab.tag == "iron_miner") tag_num = 1;
+        if (objectPrefab.tag == "gold_miner") tag_num = 2;
+        if (objectPrefab.tag == "materials_miner") tag_num = 3;
+        if (objectPrefab.tag == "titanium_miner") tag_num = 4;
+        if (objectPrefab.tag == "oil_miner") tag_num = 5;
+
+        switch (tag_num)
+        {
+            case 1:
+                ResPlData.ironMiner++;
+                break;
+            case 2:
+                ResPlData.goldMiner++;
+                break;
+            case 3:
+                ResPlData.buildMaterialsMiner++;
+                break;
+            case 4:
+                ResPlData.titaniumMiner++;
+                break;
+            case 5:
+                ResPlData.oilMiner++;
+                break;
         }
     }
     internal void CreateObject()
@@ -121,24 +132,11 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-    private void LimitCameraPosition()
-    {
-        Camera cam = Camera.main;
-        float verticalSize = cam.orthographicSize;
-        float horizontalSize = verticalSize * cam.aspect;
-
-        Vector3 pos = cam.transform.position;
-
-        // Ограничиваем позицию, чтобы камера не выходила за границы карты
-        pos.x = Mathf.Clamp(pos.x, -mapWidth + horizontalSize, mapWidth - horizontalSize);
-        pos.y = Mathf.Clamp(pos.y, -mapHeight + verticalSize, mapHeight - verticalSize);
-
-        cam.transform.position = pos;
-    }
 
     private bool Obj_in_Borders(GameObject obj)
     {
         return (obj.transform.position.x > minBorder.x && obj.transform.position.x < maxBorder.x
             && obj.transform.position.y > minBorder.y && obj.transform.position.y < maxBorder.y);
     }
+    
 }

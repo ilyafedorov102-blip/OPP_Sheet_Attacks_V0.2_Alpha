@@ -22,6 +22,9 @@ public class ResourcesManager : MonoBehaviour
     [SerializeField] private Vector2 minResBorder;
     [SerializeField] private Vector2 maxResBorder;
 
+    List<Vector2> usedPositions = new List<Vector2>();
+
+    private bool isColMainB = false;
     void Start()
     {
         Spawn_res(Sp_iron, Random.Range(4, 6), minResBorder, maxResBorder);
@@ -56,15 +59,37 @@ public class ResourcesManager : MonoBehaviour
     private void Spawn_res(GameObject Obj, int amount, Vector2 Min_crd, Vector2 Max_crd)
     {
         Vector2 Pos;
+        GameObject temp; // Список занятых позиций
+
         while (amount > 0)
         {
-            Pos.x = amount % 2 == 0 ? Random.Range(0, Max_crd.x) : Random.Range(Min_crd.x, 0);
-            Pos.y = Random.Range(Min_crd.y, Max_crd.y);
-            Pos.x = Mathf.Round(Pos.x / 2 / cellSize) * cellSize * 2;
-            Pos.y = Mathf.Round(Pos.y / 2 / cellSize) * cellSize * 2;
-            Instantiate(Obj, Pos, Quaternion.identity);
-            amount--;
+            bool positionFound = false;
+
+            while (!positionFound)
+            {
+                Pos.x = amount % 2 == 0 ? Random.Range(0, Max_crd.x) : Random.Range(Min_crd.x, 0);
+                Pos.y = Random.Range(Min_crd.y, Max_crd.y);
+                Pos.x = Mathf.Round(Pos.x / 2 / cellSize) * cellSize * 2;
+                Pos.y = Mathf.Round(Pos.y / 2 / cellSize) * cellSize * 2;
+
+                // Проверяем, не занята ли позиция
+                if (!usedPositions.Contains(Pos) && !isColMainB)
+                {
+                    usedPositions.Add(Pos);
+                    temp = Instantiate(Obj, Pos, Quaternion.identity);
+                    amount--;
+                    positionFound = true;
+                }
+            }
         }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "MainBuild1" || collision.gameObject.tag == "MainBuild2")
+        {
+            isColMainB = true;
+        }
+        else isColMainB = false;
     }
 }
 internal class ResourcesData
@@ -100,5 +125,5 @@ internal class ResourcesData
         titaniumMiner = 1;
         oilMiner = 1;
         buildMaterialsMiner = 1;
-        }
+    }
 }
