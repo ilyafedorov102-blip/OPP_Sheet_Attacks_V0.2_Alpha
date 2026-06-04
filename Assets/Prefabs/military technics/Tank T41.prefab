@@ -421,7 +421,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &7520198596556510034
 MonoBehaviour:
@@ -586,18 +586,34 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 6727074968905925143}
+    - target: {fileID: 593173963321628979, guid: 4c7e48efc89dc6749a02f699d326c7be, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BackMove
+      objectReference: {fileID: 0}
     - target: {fileID: 1359754682613591708, guid: 4c7e48efc89dc6749a02f699d326c7be, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 6727074968905925143}
+    - target: {fileID: 1359754682613591708, guid: 4c7e48efc89dc6749a02f699d326c7be, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RightMoving
+      objectReference: {fileID: 0}
     - target: {fileID: 3162588612149178046, guid: 4c7e48efc89dc6749a02f699d326c7be, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 6727074968905925143}
+    - target: {fileID: 3162588612149178046, guid: 4c7e48efc89dc6749a02f699d326c7be, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ForwardMove
+      objectReference: {fileID: 0}
     - target: {fileID: 3993088111035606327, guid: 4c7e48efc89dc6749a02f699d326c7be, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 6727074968905925143}
+    - target: {fileID: 3993088111035606327, guid: 4c7e48efc89dc6749a02f699d326c7be, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LeftMoving
+      objectReference: {fileID: 0}
     - target: {fileID: 4521472372708873624, guid: 4c7e48efc89dc6749a02f699d326c7be, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.4175

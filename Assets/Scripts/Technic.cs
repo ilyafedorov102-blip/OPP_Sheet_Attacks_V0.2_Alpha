@@ -18,7 +18,7 @@ public class Technic : MonoBehaviour
     internal void Move(Vector2 direction)
     {
         Vector3 TPos = this.transform.position;
-        Vector3 NewPos = new Vector3(0,0,0);
+        Vector3 NewPos = new Vector3(0, 0, 0);
         NewPos.x = TPos.x + cell_speed * cell_size * direction.x;
         NewPos.y = TPos.y + cell_speed * cell_size * direction.y;
         this.transform.position = NewPos;
