@@ -1,6 +1,7 @@
-using UnityEngine;
-using TMPro;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using TMPro;
+using UnityEngine;
 
 public class ResourcesManager : MonoBehaviour
 {
@@ -36,8 +37,10 @@ public class ResourcesManager : MonoBehaviour
 
     void Update()
     {
-        textResources_Pl1.text = $"\t{pl1.iron}(+{pl1.ironMiner})   |   {pl1.gold}(+{pl1.goldMiner})   |   {pl1.titanium}(+{pl1.titaniumMiner})   |   {pl1.oil}(+{pl1.oilMiner})\n\t{pl1.buildMaterials}(+{pl1.buildMaterialsMiner}    |      {pl1.electricity}      |   {pl1.money}";
-        textResources_Pl2.text = $"\t{pl2.iron}(+{pl2.ironMiner})   |   {pl2.gold}(+{pl2.goldMiner})   |   {pl2.titanium}(+{pl2.titaniumMiner})   |   {pl2.oil}(+{pl2.oilMiner})\n\t{pl2.buildMaterials}(+{pl2.buildMaterialsMiner})   |      {pl2.electricity}      |   {pl2.money}";
+        textResources_Pl1.text = $"\t<sprite name=\"iron\">{pl1.iron}(+{pl1.ironMiner})   |   " + $"<sprite name=\"gold\">{pl1.gold}(+{pl1.goldMiner})   |   " + $"<sprite name=\"titanium\">{pl1.titanium}(+{pl1.titaniumMiner})   |   " + $"<sprite name=\"oil\">{pl1.oil}(+{pl1.oilMiner})\n\t" + $"<sprite name=\"buildMaterials\">{pl1.buildMaterials}(+{pl1.buildMaterialsMiner})   |   " + $"<sprite name=\"electricity\">{pl1.electricity}   |   " + $"$ {pl1.money}";
+
+
+        textResources_Pl2.text = $"\t<sprite name=\"iron\">{pl2.iron}(+{pl2.ironMiner})   |   " + $"<sprite name=\"gold\">{pl2.gold}(+{pl2.goldMiner})   |   " + $"<sprite name=\"titanium\">{pl2.titanium}(+{pl2.titaniumMiner})   |   " + $"<sprite name=\"oil\">{pl2.oil}(+{pl2.oilMiner})\n\t" + $"<sprite name=\"buildMaterials\">{pl2.buildMaterials}(+{pl2.buildMaterialsMiner})   |   " + $"<sprite name=\"electricity\">{pl2.electricity}   |   " + $"$ {pl2.money}";
 
         if (timer.minute % 1 == 0 && timer.minute != resFlow)
         {

@@ -68,13 +68,14 @@ public class TecnichsMoving : MonoBehaviour
     }
     public void SetMenuVisibility()
     {
-        Tech_Panel.SetActive(isMenuActive);
         isMenuActive = !isMenuActive;
+        Tech_Panel.SetActive(isMenuActive);
     }
     public void SetArrowsVisibility()
     {
-        ArrowsPanel.SetActive(isArrowsActive);
         isArrowsActive = !isArrowsActive;
+        ArrowsPanel.SetActive(isArrowsActive);
+        
     }
     public void Tech_Attack()
     {

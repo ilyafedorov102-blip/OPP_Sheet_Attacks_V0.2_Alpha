@@ -74,11 +74,6 @@ public class MenuManager : MonoBehaviour
             btnDefence.interactable = true;
             btnOther.interactable = true;
             btnMove.interactable = true;
-
-            BuildingsRoadAndTerritory.SetActive(true);
-            BuildingsAttacks.SetActive(true);
-            BuildingsDefence.SetActive(true);
-            BuildingsOthers.SetActive(true);
         }
         else
         {

@@ -11,7 +11,7 @@ public class Moves : MonoBehaviour
     public Timer timer;
     private int fixTime;
     private Coroutine currentFadeCoroutine;
-
+    internal int attakedBuild;
     void Start()
     {
         Color startColor = txtMove.color;

@@ -8,6 +8,7 @@ public class Timer : MonoBehaviour
     public int minute;
     public GameObject Pause;
     public TMP_Text text;
+    public float deltaTime = 0.2f;
 
     public int Second { get => second; set => second = value; }
 
@@ -15,7 +16,7 @@ public class Timer : MonoBehaviour
     {
         if (Pause.activeSelf == false)
         {
-            miliSecond += 1f;
+            miliSecond += deltaTime;
 
             if (miliSecond >= 1)
             {

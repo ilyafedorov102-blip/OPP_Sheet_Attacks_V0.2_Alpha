@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -24,11 +26,25 @@ public class GameManager : MonoBehaviour
     private int tag_num;
     private bool isDragging;
     internal bool isSet, isMiner;
+
     private void Start()
     {
         isSet = false; isMiner = false; isDragging = false;
     }
-
+    private void Update()
+    {
+        if (PlMoves.attakedBuild != 0)
+        {
+            PlayerPrefs.SetInt("PlayerNum", PlMoves.attakedBuild);
+            PlayerPrefs.Save();
+            SceneManager.LoadScene("Final1");
+        }
+        if (isSet)
+        {
+            setObject();
+        }
+        
+    }
     private void UpdateResMinerByType(ResourcesData ResPlData, ResourceType type)
     {
         switch (type)
@@ -51,13 +67,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (isSet)
-        {
-            setObject();
-        }
-    }
+    
     private void setObject()
     {
         // Перетаскивание объекта при создании
@@ -130,6 +140,8 @@ public class GameManager : MonoBehaviour
 
                             currentObject = null;
                             isSet = false;
+                            if (PlMoves.isMoveFirst) RM.pl1.iron -= 10;
+                            else RM.pl2.iron -= 10;
                         }
                     }
                     else
@@ -139,6 +151,18 @@ public class GameManager : MonoBehaviour
 
                         // ДОБАВЬТЕ: сбросьте флаги для нового объекта
                         isMiner = false;
+                        if (PlMoves.isMoveFirst)
+                        {
+                            RM.pl1.iron -= 20;
+                            RM.pl1.buildMaterials -= 30;
+                            RM.pl1.titanium -= 5;
+                        }
+                        else
+                        {
+                            RM.pl2.iron -= 20;
+                            RM.pl2.buildMaterials -= 30;
+                            RM.pl2.titanium -= 5;
+                        }
                     }
                 }
             }
